@@ -1,0 +1,100 @@
+<mat-toolbar color="primary">
+    <button mat-mini-fab class="example-icon" aria-label="Example icon-button with menu icon" color="warn">
+    <mat-icon>opacity</mat-icon>
+    </button>
+    <span>DonorShip</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="accent" (click)="openDialog('3000ms', '1500ms')">
+     Register as a New Donor!
+    </button>
+</mat-toolbar>
+
+<h1 class="donor-quote">🩸Recycle yourself, become an organ donor!</h1>
+
+<div class="container">
+    <div style="margin-top:10px">
+        <mat-form-field appearance="outline" style="width:50%;padding-left:25%">
+            <button mat-icon-button color="primary" matSuffix>
+            <mat-icon>search</mat-icon>
+          </button>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search Donor Here..." #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="age">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Age </th>
+                    <td mat-cell *matCellDef="let row"> {{row.age}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="dob">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> DOB </th>
+                    <td mat-cell *matCellDef="let row"> {{row.dob | date }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                    <td mat-cell *matCellDef="let row"> {{row.address}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phoneNo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone No </th>
+                    <td mat-cell *matCellDef="let row"> {{row.phoneNo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="bloodGroup">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Blood Group </th>
+                    <td mat-cell *matCellDef="let row"> {{row.bloodGroup}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="healthDetails">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Health Status </th>
+                    <td mat-cell *matCellDef="let row"> {{row.healthDetails}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="organstoDonate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Organs Donated </th>
+                    <td mat-cell *matCellDef="let row"> {{row.organstoDonate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="specificPurpose">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Purpose </th>
+                    <td mat-cell *matCellDef="let row"> {{row.specificPurpose}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button color="primary" (click)="editDonor(row)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteDonor(row.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" aria-label="Select page of users">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

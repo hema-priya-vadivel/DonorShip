@@ -1,0 +1,101 @@
+<div [align]="'end'">
+    <button mat-icon-button aria-label="Example icon-button" mat-dialog-close color="warn">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<h1 mat-dialog-title>Wohoo! Welcome, You're a New Donor
+    <mat-icon mat-fab color="warn">invert_colors</mat-icon>
+</h1>
+<h2>Personal Information</h2>
+
+<div mat-dialog-content>
+    <form [formGroup]="donorDetailsForm">
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>First name</mat-label>
+                        <input formControlName="firstName" matInput placeholder="Enter FirstName">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input formControlName="lastName" matInput placeholder="Enter LastName">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Age</mat-label>
+                        <input formControlName="age" type="number" matInput placeholder="Enter Age">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>DOB</mat-label>
+                        <input formControlName="dob" matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Address</mat-label>
+            <textarea formControlName="address" matInput placeholder="Ex. 565, Garden St, Chennai-82"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline" required>
+            <mat-label>Phone Number</mat-label>
+            <input formControlName="phoneNo" type="number" matInput placeholder="Enter only numbers">
+            <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline" required>
+            <mat-label>Blood Group</mat-label>
+            <mat-select formControlName="bloodGroup" placeholder="Choose Blood Group">
+                <mat-option value="A+">A+</mat-option>
+                <mat-option value="A-">A-</mat-option>
+                <mat-option value="B+">B+</mat-option>
+                <mat-option value="B-">B-</mat-option>
+                <mat-option value="O+">O+</mat-option>
+                <mat-option value="O-">O-</mat-option>
+                <mat-option value="AB+">AB+</mat-option>
+                <mat-option value="AB-">AB-</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Previous Hospitalization (Provide the reason and treatment details.)</mat-label>
+            <textarea formControlName="healthDetails" matInput placeholder="High BP - Past 3 years"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Willing to donate organs? If yes,specify</mat-label>
+            <textarea formControlName="organstoDonate" matInput placeholder="Liver/Kidney/Pancreas/Heart/Cornea/Bone/Lung/Bone Marrow/All"></textarea>
+        </mat-form-field>
+
+
+        <label for=""><h4><strong>Donation Purpose</strong></h4></label>
+        <mat-radio-group formControlName="specificPurpose" class="example-radio-group">
+            <mat-radio-button *ngFor="let donationPurpose of donationPurposes" [value]="donationPurpose" class="example-radio-button">
+                {{ donationPurpose }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </form>
+</div>
+
+
+<div mat-dialog-action [align]="'center'">
+    <button mat-raised-button color="primary" (click)="addDonors()">{{ actionButton }}</button>
+    <button class="cancel-button" mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+</div>
